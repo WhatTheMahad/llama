@@ -2,7 +2,7 @@ import streamlit as st
 import numpy as np
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-model = AutoModelForCausalLM.from_pretrained("whatthemahad/llama3")
+model = AutoModelForCausalLM.from_pretrained("whatthemahad/lamini-test")
 
 st.title = "Llama3 Demo"
 
