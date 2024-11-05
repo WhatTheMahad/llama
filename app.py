@@ -3,7 +3,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 import torch
 
 # Set the title of the app
-st.title("LaMini Demo")
+st.title("LaMini Test")
 
 # Load the model and tokenizer
 @st.cache_resource
@@ -20,7 +20,7 @@ tokenizer, model = load_model()
 def generate_text(prompt):
     inputs = tokenizer(prompt, return_tensors="pt")
     with torch.no_grad():
-        outputs = model.generate(**inputs, max_length=100, num_return_sequences=1)
+        outputs = model.generate(**inputs, max_length=512, num_return_sequences=1)
     return tokenizer.decode(outputs[0], skip_special_tokens=True)
 
 # Add a text input for user to enter a prompt
