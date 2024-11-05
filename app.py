@@ -3,8 +3,7 @@ from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
 import torch
 from huggingface_hub import login
 
-# Ensure you're authenticated (if using a private model)
-# login(token="your_huggingface_api_token")  # Uncomment this line if necessary
+login(token='HF_TOKEN')
 
 st.title("LaMini Demo")
 
