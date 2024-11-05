@@ -2,10 +2,12 @@ import streamlit as st
 from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
 import torch
 from huggingface_hub import login
+import os
 
-login(token='HF_TOKEN')
+hf_token = os.getenv("HF_TOKEN")
+login(token=hf_token)
 
-st.title("LaMini Demo")
+st.title("LaMini App")
 
 # Load the model and tokenizer
 @st.cache_resource
