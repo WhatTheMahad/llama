@@ -1,27 +1,36 @@
 import streamlit as st
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
 import torch
+from huggingface_hub import login
 
-# Set the title of the app
-st.title("LaMini Test")
+# Ensure you're authenticated (if using a private model)
+# login(token="your_huggingface_api_token")  # Uncomment this line if necessary
+
+st.title("LaMini Demo")
 
 # Load the model and tokenizer
 @st.cache_resource
 def load_model():
-    # Replace with the correct model path for LaMini
-    model_name = "MBZUAI/LaMini-T5-738M"  # Update this if the model name is different
-    tokenizer = AutoTokenizer.from_pretrained(model_name)
-    model = AutoModelForCausalLM.from_pretrained(model_name)
-    return tokenizer, model
+    model_name = "MBZUAI/LaMini-T5-738M"  # Update with correct model path if necessary
+    try:
+        tokenizer = AutoTokenizer.from_pretrained(model_name)
+        model = AutoModelForSeq2SeqLM.from_pretrained(model_name)  # Use AutoModelForSeq2SeqLM
+        return tokenizer, model
+    except Exception as e:
+        st.error(f"Error loading model: {e}")
+        return None, None
 
 tokenizer, model = load_model()
 
 # Generate text function
 def generate_text(prompt):
-    inputs = tokenizer(prompt, return_tensors="pt")
-    with torch.no_grad():
-        outputs = model.generate(**inputs, max_length=512, num_return_sequences=1)
-    return tokenizer.decode(outputs[0], skip_special_tokens=True)
+    if tokenizer and model:
+        inputs = tokenizer(prompt, return_tensors="pt")
+        with torch.no_grad():
+            outputs = model.generate(**inputs, max_length=100, num_return_sequences=1)
+        return tokenizer.decode(outputs[0], skip_special_tokens=True)
+    else:
+        return "Model failed to load."
 
 # Add a text input for user to enter a prompt
 prompt = st.text_area("Enter your prompt:", "")
