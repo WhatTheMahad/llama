@@ -9,7 +9,7 @@ st.title("LaMini Demo")
 @st.cache_resource
 def load_model():
     # Replace with the correct model path for LaMini
-    model_name = "whatthemahad/lamini"  # Update this if the model name is different
+    model_name = "whatthemahad/lamini-test"  # Update this if the model name is different
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     model = AutoModelForCausalLM.from_pretrained(model_name)
     return tokenizer, model
