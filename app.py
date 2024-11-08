@@ -12,7 +12,7 @@ st.title("LaMini App")
 # Load the model and tokenizer
 @st.cache_resource
 def load_model():
-    model_name = "whatthemahad/lamini-test"  # Update with correct model path if necessary
+    model_name = "MBZUAI/LaMini-T5-738M"  # Update with correct model path if necessary
     try:
         tokenizer = AutoTokenizer.from_pretrained(model_name)
         model = AutoModelForSeq2SeqLM.from_pretrained(model_name)  # Use AutoModelForSeq2SeqLM
