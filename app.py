@@ -13,7 +13,7 @@ if "messages" not in st.session_state:
 # Load model and tokenizer
 @st.cache_resource
 def load_model():
-    model_name = "whatthemahad/lamini-test"  # Update with correct model path if necessary
+    model_name = "MBZUAI/LaMini-instruction"  # Update with correct model path if necessary
     try:
         tokenizer = AutoTokenizer.from_pretrained(model_name)
         model = AutoModelForSeq2SeqLM.from_pretrained(model_name)
